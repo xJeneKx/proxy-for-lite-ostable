@@ -11,6 +11,7 @@ async function bootstrap() {
     AppModule,
     new FastifyAdapter(),
   );
+  app.enableCors();
   const configService = app.get(ConfigService);
   await app.listen(configService.get('PORT') || 3000);
 }

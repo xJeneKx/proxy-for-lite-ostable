@@ -9,8 +9,8 @@ import { Price2 } from './interfaces/price2.interface';
 
 @Injectable()
 export class AppService implements OnModuleInit, BeforeApplicationShutdown {
-  private price1: any = {};
-  private price2: any = {};
+  private price1: Price1;
+  private price2: Price2;
   private timer = null;
   private isFirstCurrencyUpdate = true;
 
@@ -27,7 +27,7 @@ export class AppService implements OnModuleInit, BeforeApplicationShutdown {
     try {
       this.price1 = (
         await axios.get('https://api.bitfinex.com/v1/pubticker/btcusd')
-      ).data;
+      ).data as Price1;
     } catch (e) {
       if (this.isFirstCurrencyUpdate) process.exit(0);
     }
@@ -35,7 +35,7 @@ export class AppService implements OnModuleInit, BeforeApplicationShutdown {
     try {
       this.price2 = (
         await axios.get('https://api.bittrex.com/v3/markets/GBYTE-BTC/ticker')
-      ).data;
+      ).data as Price2;
     } catch (e) {
       if (this.isFirstCurrencyUpdate) process.exit(0);
     }
