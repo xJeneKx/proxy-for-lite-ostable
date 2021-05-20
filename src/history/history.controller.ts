@@ -10,6 +10,6 @@ export class HistoryController {
     @Param('address') address: string,
     @Param('stable') stable: string,
   ) {
-    return this.historyService.findOutputsByAddress(address, stable);
+    return this.historyService.getStatusTransactionsInAA(address, stable);
   }
 }

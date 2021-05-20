@@ -3,13 +3,14 @@ import { createQueryBuilder, Repository } from 'typeorm';
 
 @Injectable()
 export class HistoryService {
-  findOutputsByAddress(address: string, stable: string) {
+  getStatusTransactionsInAA(address: string, stable: string) {
     return createQueryBuilder('outputs', 'outputs')
       .select([
         'units.unit AS unit',
         'units.is_stable AS is_stable',
-        'responses.bounced as bounced',
-        'responses.response as response',
+        'responses.bounced AS bounced',
+        'responses.response AS response',
+        'units.timestamp AS timestamp',
       ])
       .leftJoin('unit_authors', 'authors', 'authors.unit = outputs.unit')
       .leftJoin('units', 'units', 'units.unit = outputs.unit')
