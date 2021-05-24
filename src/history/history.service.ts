@@ -22,6 +22,7 @@ export class HistoryService {
       .where('outputs.address = :stable', { stable })
       .andWhere('authors.address = :address', { address })
       .orderBy('units.rowid', 'DESC')
+      .groupBy('units.unit')
       .limit(15)
       .getRawMany();
   }
